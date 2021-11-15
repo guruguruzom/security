@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+</head>
+<body>
+<script>
+function login() {
+		var username = $("#username").val();
+		var password = $("#password").val();
+		
+		if(username == "") {
+			alert("아이디를 입력해주세요.");
+			return false;
+		}
+		
+		if(password == "") {
+			alert("비밀번호를 입력해주세요.");
+			return false;
+		}
+		
+		// TODO 로그인 처리
+		document.pform.submit();
+	}
+</script>
+	<div id="wrapper">
+		<div style="margin-top:100px;">
+			<form name="pform" action="<c:url value='/loginAction' />" method="POST">
+				<div class="login_box">
+					<div style="text-align:center;">
+						<img width="350px" src="${contextPath}/images/login_logo.png" alt="Doctor Answer" />
+					</div>
+					<div style="text-align:center;color:#dee1e6;margin-top:10px;">
+						전립선암 통합 예후 예측 소프트웨어 V1.0
+					</div>
+					<ul>
+					 <!--  -->
+						<li class="login_id_icon"><input autocomplete="off" type="text" style="ime-mode:inactive;" id="username" name="username" 
+						placeholder="등록된 의료진 아이디를 입력해 주세요." onpaste="javascript:return false;" onKeyup="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'');"/></li>
+						<li class="login_password_icon"><input type="password" id="password"  name="password" placeholder="비밀번호를 입력해 주세요." onpaste="javascript:return false;" autocomplete="off"/></li>
+						<c:if test="${msg eq 'failure' }">
+						
+							<li style="color:#FF4040;margin-top:5px;">* 입력하신 아이디와 비밀번호가 일치하지 않습니다.</li>
+						</c:if>
+						<c:if test="${msg eq 'locked' }">
+							
+							<li style="color:#FF4040;margin-top:5px;">* 5회 이상 로그인에 실패하여 계정이 잠금처리 되었습니다.</li>
+							<li style="color:#FF4040;margin-top:5px;">&nbsp;&nbsp;(연락처: 02-1661-2858)</li>
+							<!-- <br>
+							<li style="color:#FF4040;margin-top:5px;">고객지원센터</li>
+							<li style="color:#FF4040;margin-top:5px;">-연락처: 02-1661-2858</li> 
+							<li style="color:#FF4040;margin-top:5px;">-F A X: 02-2038-2858 </li>
+							<li style="color:#FF4040;margin-top:5px;">-이메일: info@lifesemantics.kr</li> -->
+							
+						</c:if>
+					</ul>
+					<!-- <div class="login_auto"><span>자동로그인</span></div> -->
+					<div style="width:100%;"><a class="login_btn" onclick="login();">로그인</a></div>
+					<div class="down_btn">
+						<a href="${contextPath}/manual.zip" >Manual Download </a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
